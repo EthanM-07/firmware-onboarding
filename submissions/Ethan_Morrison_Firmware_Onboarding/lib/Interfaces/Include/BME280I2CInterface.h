@@ -13,7 +13,7 @@ public:
      * @param addr I2C address of the sensor (defaults to 0x77 or a constant from BMEConstants.h).
      * @return true if initialization succeeded, false otherwise.
      */
-    bool begin(uint8_t address = 0x77) {
+    bool begin(uint8_t address = 0x76) {
     return bme.begin(address);
   }
     /**

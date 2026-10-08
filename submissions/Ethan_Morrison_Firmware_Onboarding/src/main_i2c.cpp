@@ -14,16 +14,21 @@ LEDController<BMEI2CInterfaceInstance> ledControllerDevice;
 
 void setup() {
 
-  BMEI2CInterfaceInstance::create(bmeHardwareDevice);
-  LEDControllerInstance::create(ledControllerDevice);
+  BMEI2CInterfaceInstance::create();
+  LEDControllerInstance::create();
 
-  BMEI2CInterfaceInstance::instance().begin();
+  Serial.begin(115200);
+ if(!BMEI2CInterfaceInstance::instance().begin()){
+  Serial.print("failed");
+ }
   pinMode(LEDpin, OUTPUT);
 }
 
 void loop() {
   float blinkRate = LEDControllerInstance::instance().getblinkRate();
   float blink_period = 1000.0f/blinkRate;
+  float temp = BMEI2CInterfaceInstance::instance().gettemp();
+  Serial.println (temp);
 
   digitalWrite(LEDpin, HIGH);
   delay(.5f*blink_period);
